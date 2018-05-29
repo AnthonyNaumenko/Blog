@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+<h2>Create new post</h2>
+    <div class="row">
+        <div class="col-6">
+        {{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+        {{ form_widget(form) }}
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+                <div class="col-sm-10">
+                    <br><a href="{{ path('main_page') }}">Back to main</a>
+                </div>
+
+            </div>
+        {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
