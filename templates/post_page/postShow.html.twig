@@ -6,7 +6,7 @@
 
     <div class="container">
 
-        <div class="row mb-2">
+        <div class="row mb-4">
 
             <div class="col-md-6">
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
@@ -15,8 +15,10 @@
                             <a class="text-dark">{{ post.title }}</a>
                         </h3>
                         <div class="mb-1 text-muted">{{ post.date|date("d.M.y H:m:s") }}</div>
-                        <p class="card-text mb-auto">{{ post.text }}</p>
-                        <a href="{{ path('post_show', {id: post.id}) }} ">Continue reading</a>
+
+                        <div class="card-text mb-auto col-3 text-truncate">{{ post.text }}</div>
+
+                        <a href="{{ path('post_page', {id: post.id}) }} ">Continue reading</a>
                         <div>
                             <a href="{{ path('post_delete', {id: post.id}) }}" class="btn btn-danger">Delete</a>
                             <a href="{{ path('post_edit',  {id: post.id}) }}">Edit post</a>

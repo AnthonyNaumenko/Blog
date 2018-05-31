@@ -2,15 +2,21 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <h1>{{ post.title }}</h1>
-    <h3>{{ post.date|date("d.M.y H:m:s") }}</h3>
-<p>{{ post.text }}</p>
-    <div class="col-sm-10">
-        <br><a href="{{ path('main_page') }}">Back to main</a>
-    </div>
 
-    <div class="col-sm-10">
-        <br><a href="{{ path('post_edit',  {id: post.id}) }}">Edit post</a>
-    </div>
+
+
+                        <h1>{{ post.title }}</h1>
+
+                        <h3>{{ post.date|date("d.M.y H:m:s") }}</h3>
+
+                         <div class="col-10">{{ post.text }}</div>
+
+                    <div class="col-sm-10">
+                        <br><a href="{{ path('main_page') }}">Back to main</a>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <br><a href="{{ path('post_edit',  {id: post.id}) }}">Edit post</a>
+                    </div>
 {% endblock %}
 
