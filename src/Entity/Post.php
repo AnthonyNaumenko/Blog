@@ -84,6 +84,9 @@ class Post
     }
 
 
+    public function stringDate(){
+        $stringDate = $this->getDate()->format(DATE_RFC2822);
+    }
 
 
 }
