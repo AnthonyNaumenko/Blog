@@ -3,20 +3,48 @@
 
 {% block body %}
 
+    <h1>{{ post.title }}</h1>
+
+    <h3>{{ post.date|date("d.M.y H:m:s") }}</h3>
+
+    <div class="col-10">
+        {{ post.text }}
+    </div>
+
+    <h2>Комментарии</h2>
+
+    {% for comments in comment %}
+
+    <h3>{{ comments.DateTime|date("d.M.y H:m:s") }}</h3>
+    <h3>{{ comments.nickname }}</h3>
+    <div class="col-10">
+        {{ comments.text }}
+    </div>
+
+    {% endfor %}
+<br>
+    <h2>Create new comment</h2>
+    <div class="row">
+        <div class="col-6">
+            {{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+            {{ form_widget(form) }}
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
 
 
-                        <h1>{{ post.title }}</h1>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
 
-                        <h3>{{ post.date|date("d.M.y H:m:s") }}</h3>
+    <div class="col-sm-10">
+        <br><a href="{{ path('main_page') }}">Back to main</a>
+    </div>
 
-                         <div class="col-10">{{ post.text }}</div>
-
-                    <div class="col-sm-10">
-                        <br><a href="{{ path('main_page') }}">Back to main</a>
-                    </div>
-
-                    <div class="col-sm-10">
-                        <br><a href="{{ path('post_edit',  {id: post.id}) }}">Edit post</a>
-                    </div>
+    <div class="col-sm-10">
+        <br><a href="{{ path('post_edit',  {id: post.id}) }}">Edit post</a>
+    </div>
 {% endblock %}
 

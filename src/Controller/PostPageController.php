@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\AddFormPostType;
+use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,10 +18,37 @@ class PostPageController extends Controller
     /**
      * @Route("/post/{id}", name="post_page")
      */
-    public function postPage(Post $post)
+    public function postPage(Post $post, Request $request, EntityManagerInterface $entityManager)
     {
+
+        $comment = new Comment();
+
+        $comment->setPost($post);
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $id = $comment->getId();
+
+            return $this->redirectToRoute('post_success',[
+                'id'=>$id,
+            ]);
+        }
+
+        $repo = $this->getDoctrine()->getRepository(Comment::class);
+        $comments = $repo->findAll();
+
+       /* $repo = $this->getDoctrine()->getRepository(Comment::class);
+        $comment = $repo->findBy(array(),array('DateTime' => 'DESC'));*/
+
         return $this->render('post_page/postPage.html.twig', [
             'post' => $post,
+            'comment' => $comment,
+            'comments'=>$comments,
+            'form' => $form->createView(),
         ]);
     }
 
