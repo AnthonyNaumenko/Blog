@@ -18,10 +18,11 @@
                             <div class="mb-1 text-muted">{{ posts.date|date("d.M.y H:m:s") }}</div>
 
                             <div class="card-text mb-auto col-3 text-truncate">{{ posts.text }}</div>
-
+                            <div>
+                                <p>Коментариев {{ posts.comment.count }}</p>
+                            </div>
                             <a href="{{ path('post_page', {id: posts.id}) }} ">Continue reading</a>
                         </div>
-
                     </div>
                 </div>
             </div>

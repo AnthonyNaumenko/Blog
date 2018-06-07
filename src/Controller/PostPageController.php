@@ -7,7 +7,7 @@ use App\Entity\Post;
 use App\Form\AddFormPostType;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,36 +22,25 @@ class PostPageController extends Controller
     {
 
         $comment = new Comment();
-
         $comment->setPost($post);
-
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($comment);
             $entityManager->flush();
-            $id = $comment->getId();
+            $id = $post->getId();
 
-            return $this->redirectToRoute('post_success',[
+            return $this->redirectToRoute('post_page',[
                 'id'=>$id,
             ]);
         }
 
-        $repo = $this->getDoctrine()->getRepository(Comment::class);
-        $comments = $repo->findAll();
-
-       /* $repo = $this->getDoctrine()->getRepository(Comment::class);
-        $comment = $repo->findBy(array(),array('DateTime' => 'DESC'));*/
-
         return $this->render('post_page/postPage.html.twig', [
             'post' => $post,
-            'comment' => $comment,
-            'comments'=>$comments,
             'form' => $form->createView(),
         ]);
     }
-
 
     /**
      * @Route("/add", name="post_add")
@@ -82,6 +71,7 @@ class PostPageController extends Controller
      *@Route("/post/{id}", name="post_success")
      */
     public function postSuccess(){
+
         return $this->render('post_page/postPage.html.twig');
     }
 
@@ -136,4 +126,6 @@ class PostPageController extends Controller
 
         return $this->redirectToRoute('post_show');
     }
+
+
 }
