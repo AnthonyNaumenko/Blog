@@ -18,7 +18,9 @@
                         <div class="mb-1 text-muted">{{ post.date|date("d.M.y H:m:s") }}</div>
 
                         <div class="card-text mb-auto col-3 text-truncate">{{ post.text }}</div>
-
+                        <div>
+                            <p>Коментариев {{ post.comment.count }}</p>
+                        </div>
                         <a href="{{ path('post_page', {id: post.id}) }} ">Continue reading</a>
                         <div>
                             <a href="{{ path('post_delete', {id: post.id}) }}" class="btn btn-danger">Delete</a>
