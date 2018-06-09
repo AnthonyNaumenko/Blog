@@ -42,6 +42,7 @@ class Post
      * @var Comment[]
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
+     * @ORM\OrderBy({"DateTime"= "DESC"})
      */
     private $comment;
 

@@ -25,7 +25,7 @@ class User extends BaseUser
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     */
+     */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     protected $id;
     /**
      * @var bool
@@ -40,7 +40,7 @@ class User extends BaseUser
         $this->email = '';
         $this->roles = ['ROLE_USER'];
         $this->acceptRules = false;
-        $this->orders = new ArrayCollection();
+
     }
 
     /**
